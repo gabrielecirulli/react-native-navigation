@@ -335,9 +335,9 @@ NSString const *CALLBACK_ASSOCIATED_ID = @"RCCNavigationController.CALLBACK_ASSO
     if (buttonColorTag) buttonColor = [RCTConvert UIColor:buttonColorTag];
 
     UIBarButtonItem *barButtonItem;
-    if (systemitem != NSNotFound)
+    if (systemItem != NSNotFound)
     {
-      barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:systemItem target:self, action:@selector(onButtonPress:)];
+      barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:systemItem target:self action:@selector(onButtonPress:)];
     }
     else if (iconImage)
     {
