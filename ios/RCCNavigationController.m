@@ -7,6 +7,7 @@
 #import "RCCTitleViewHelper.h"
 #import "UIViewController+Rotation.h"
 #import "RCTHelpers.h"
+#import <React/RCTNavItemManager.h>
 
 @implementation RCCNavigationController
 {
