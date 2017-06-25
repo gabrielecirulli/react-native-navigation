@@ -325,9 +325,21 @@ NSString const *CALLBACK_ASSOCIATED_ID = @"RCCNavigationController.CALLBACK_ASSO
     UIImage *iconImage = nil;
     id icon = button[@"icon"];
     if (icon) iconImage = [RCTConvert UIImage:icon];
-    
+
+    id systemItemName = button[@"systemItem"];
+    UIBarButtonSystemItem systemItem = NSNotFound;
+    if (systemItemName) systemItem = [RCTConvert UIBarButtonSystemItem:systemItemName];
+
+    id buttonColorTag = button[@"buttonColor"];
+    UIColor *buttonColor = nil;
+    if (buttonColorTag) buttonColor = [RCTConvert UIColor:buttonColorTag];
+
     UIBarButtonItem *barButtonItem;
-    if (iconImage)
+    if (systemitem != NSNotFound)
+    {
+      barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:systemItem target:self, action:@selector(onButtonPress:)];
+    }
+    else if (iconImage)
     {
       barButtonItem = [[UIBarButtonItem alloc] initWithImage:iconImage style:UIBarButtonItemStylePlain target:self action:@selector(onButtonPress:)];
     }
@@ -344,6 +356,11 @@ NSString const *CALLBACK_ASSOCIATED_ID = @"RCCNavigationController.CALLBACK_ASSO
     objc_setAssociatedObject(barButtonItem, &CALLBACK_ASSOCIATED_KEY, button[@"onPress"], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     [barButtonItems addObject:barButtonItem];
     
+
+    if (buttonColor) {
+      barButtonItem.tintColor = buttonColor;
+    }
+
     NSString *buttonId = button[@"id"];
     if (buttonId)
     {
